@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise in js</title>
+</head>
+
+<body>
+    <h1>Hello</h1>
+    <script>
+        var url = "https://newsapi.org/v2/everything?q=tesla&from=2023-12-11&sortBy=publishedAt&apiKey=6f1ae1b1b6534f1282bbb413a5e31712"
+        var arr = [3, [1, 2, 3], ["a", "b", "c"], "m"]
+        var a = arr.map((item) => {
+            if (Array.isArray(item)) {
+                item.map((i)=>{
+                    console.log(i)
+                })
+            }
+            else {
+                console.log(item);
+            }
+        });
+
+    </script>
+</body>
+
+</html>

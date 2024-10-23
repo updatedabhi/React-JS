@@ -1,0 +1,38 @@
+/* PokemonApp.css */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.selected-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  z-index: 1000;
+}
+
+.selected-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.btn-danger {
+  margin-top: 10px;
+}
+
+/* Add any additional styling as needed */

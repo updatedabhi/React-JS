@@ -1,0 +1,136 @@
+{/* <Home name = {name} age = {age} phone = {phone} course = {course}/>
+      <Services/>
+      <Portfolio/>
+      <ThemeApp/> */}
+      {/* <Form/> */}
+      {/* <Form1/> */}
+
+
+->returing stae using object data structrue in form.
+const [input, setInput] = [{
+    name: "",
+    email: "",
+    password: ""
+  }]
+
+return
+<div>
+      <form action="">
+        <label htmlFor="name">Name: </label>
+        <input type="text" />
+        <label htmlFor="email">Email: </label>
+        <input type="email" />
+        <label htmlFor="password">Password: </label>
+        <input type="text" />
+      </form>
+ </div>
+
+2nd method:
+ const [input, setInput] = useState({
+    name: "",
+    email: ""
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return 
+  <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name: </label>
+        <input
+          type="text"
+          value={input.name}
+          onChange={(e) => setInput((prev) => ({ ...prev, name: e.target.value }))}
+        />
+        <label htmlFor="email">Email: </label>
+        <input
+          type="text"
+          value={input.email}
+          onChange={(e) => setInput((prev) => ({ ...prev, email: e.target.value }))}
+        />
+        <button type="submit">Submit</button>
+      </form>
+
+      {submitted && (
+        <div>
+          <h1>Name: {input.name}</h1>
+          <h1>Email: {input.email}</h1>
+        </div>
+      )}
+
+
+      // import News from "./components/News";
+// import "./components/News.css"
+
+
+
+const fetchPokemonDetails = async (url) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching Pokemon details:', error);
+    }
+  };
+
+  const handleCardClick = async (pokemon) => {
+    const details = await fetchPokemonDetails(pokemon.url);
+    setSelectedPokemon(details);
+  };
+
+  const handleResetClick = () => {
+    setSelectedPokemon(null);
+  };
+
+  return (
+    <div className="container mt-5">
+      <h1 className="mb-4">Pokemon App</h1>
+      <div className="row">
+        {pokemonData.map((pokemon, index) => (
+          <div key={index} className="col-md-3 mb-4">
+            <div
+              className={`card ${selectedPokemon === pokemon ? 'selected' : ''}`}
+              onClick={() => handleCardClick(pokemon)}
+            >
+              <img
+                src={`https://pokeres.bastionbot.org/images/pokemon/${index + 1}.png`}
+                alt={pokemon.name}
+                className="card-img-top"
+              />
+              <div className="card-body">
+                <p className="card-text">ID: {index + 1}</p>
+                <p className="card-text">Name: {pokemon.name}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {selectedPokemon && (
+        <div className="selected-card">
+          <div className="card">
+            <img
+              src={selectedPokemon.sprites.dream_world.front_default}
+              alt={selectedPokemon.name}
+              className="card-img-top"
+            />
+            <div className="card-body">
+              <h5 className="card-title">Name: {selectedPokemon.name}</h5>
+              <p className="card-text">ID: {selectedPokemon.id}</p>
+              <button className="btn btn-danger" onClick={handleResetClick}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default PokemonApp;
